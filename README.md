@@ -4,7 +4,8 @@
 
 ---
 
-<img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/51f71182-2db2-46ab-aa0b-8fef54a4d394" />   <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/1bcdf937-a723-4c7b-9b3a-9dcfcb59560c" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/2cbd489e-b510-4473-9141-fe5dcf8e7e04" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/910fdc7d-4b6d-41e9-bead-abafaa1fafee" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/ff00d62b-5808-4874-b888-450b4b464870" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/6ca2964c-40ff-41df-802f-584831b0fbfe" />
+<img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/51f71182-2db2-46ab-aa0b-8fef54a4d394" />   <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/1bcdf937-a723-4c7b-9b3a-9dcfcb59560c" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/2cbd489e-b510-4473-9141-fe5dcf8e7e04" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/910fdc7d-4b6d-41e9-bead-abafaa1fafee" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/ff00d62b-5808-4874-b888-450b4b464870" /> <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/6ca2964c-40ff-41df-802f-584831b0fbfe" />  <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/aa9b7cae-7486-427b-bc16-9f63d5cc2816" />
+
 
 
 
@@ -174,16 +175,6 @@ Generate and download patient prediction reports in PDF format.
 
 ---
 
-## 👩‍💻 Author
 
-### 🌟 Rajasubasri (Sanjanagurubaran)
 
-**Department:** Electrical and Electronics Engineering (EEE)
 
-**Domain:** Machine Learning • Healthcare Analytics • Web Development
-
----
-
-## ⭐ Support
-
-If you found this project useful, please consider giving it a **⭐ Star** on GitHub.
