@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        ICU Admin Dashboard
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- ========================= -->
+        <!-- TOP BAR -->
+        <!-- ========================= -->
+
+        <div class="top-bar">
+
+            <div>
+
+                <h1>
+                    ICU Prediction Dashboard
+                </h1>
+
+                <p>
+                    Apache ICU Admin Monitoring System
+                </p>
+
+            </div>
+
+            <a href="/logout">
+
+                <button type="button"
+                    class="logout-btn">
+
+                    Logout
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- FORM -->
+        <!-- ========================= -->
+
+        <form action="/predict"
+            method="POST">
+
+            <!-- ========================= -->
+            <!-- PATIENT DETAILS -->
+            <!-- ========================= -->
+
+            <div class="section-card">
+
+                <h2>
+                    Patient Details
+                </h2>
+
+                <div class="grid">
+
+                    <div class="input-box">
+
+                        <label>
+                            Patient Name
+                        </label>
+
+                        <input type="text"
+                            name="patient_name"
+                            placeholder="Enter Patient Name"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Age
+                        </label>
+
+                        <input type="number"
+                            name="Age"
+                            placeholder="Enter Age"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- VITAL PARAMETERS -->
+            <!-- ========================= -->
+
+            <div class="section-card">
+
+                <h2>
+                    Vital Parameters
+                </h2>
+
+                <div class="grid">
+
+                    <div class="input-box">
+
+                        <label>
+                            Temperature
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Temperature"
+                            placeholder="Body Temperature"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Mean Arterial Pressure
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="MeanArterialPressure"
+                            placeholder="MAP"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Heart Rate
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="HeartRate"
+                            placeholder="Heart Rate"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Respiratory Rate
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="RespiratoryRate"
+                            placeholder="Respiratory Rate"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            FiO2
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="FiO2"
+                            placeholder="FiO2"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            pO2
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="pO2"
+                            placeholder="pO2"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            pCO2
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="pCO2"
+                            placeholder="pCO2"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Arterial pH
+                        </label>
+
+                        <input type="number"
+                            step="0.01"
+                            name="ArterialpH"
+                            placeholder="Arterial pH"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- LAB PARAMETERS -->
+            <!-- ========================= -->
+
+            <div class="section-card">
+
+                <h2>
+                    Laboratory Parameters
+                </h2>
+
+                <div class="grid">
+
+                    <div class="input-box">
+
+                        <label>
+                            Sodium
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Sodium"
+                            placeholder="Sodium"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Creatinine
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Creatinine"
+                            placeholder="Creatinine"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Urea
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Urea"
+                            placeholder="Urea"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Albumin
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Albumin"
+                            placeholder="Albumin"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Bilirubin
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Bilirubin"
+                            placeholder="Bilirubin"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            Hematocrit
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="Hematocrit"
+                            placeholder="Hematocrit"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            WBC
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="WBC"
+                            placeholder="White Blood Cells"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- APACHE PARAMETERS -->
+            <!-- ========================= -->
+
+            <div class="section-card">
+
+                <h2>
+                    APACHE Parameters
+                </h2>
+
+                <div class="grid">
+
+                    <div class="input-box">
+
+                        <label>
+                            APACHE IV Score
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="ApacheivScore"
+                            placeholder="APACHE IV"
+                            required>
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <label>
+                            APS Score
+                        </label>
+
+                        <input type="number"
+                            step="0.1"
+                            name="ApsScore"
+                            placeholder="APS Score"
+                            required>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- BUTTON -->
+            <!-- ========================= -->
+
+            <div class="button-container">
+
+                <button class="predict-btn">
+
+                    Predict Patient Status
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

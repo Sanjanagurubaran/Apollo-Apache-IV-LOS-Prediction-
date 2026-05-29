@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Prediction Results
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="results-container">
+
+        <!-- ======================= -->
+        <!-- TOP HEADER -->
+        <!-- ======================= -->
+
+        <div class="top-bar">
+
+    <div>
+
+        <h1>
+            ICU Prediction Results
+        </h1>
+
+        <p>
+            Apache ICU Admin Monitoring System
+        </p>
+
+    </div>
+
+    <a href="/logout">
+
+        <button type="button"
+                class="logout-btn">
+
+            Logout
+
+        </button>
+
+    </a>
+
+</div>
+        <!-- ======================= -->
+        <!-- PATIENT INFO -->
+        <!-- ======================= -->
+
+        <div class="patient-info-card">
+
+            <h2>
+                {{ patient_name }}
+            </h2>
+
+            <p>
+                Age : {{ patient_age }}
+            </p>
+
+        </div>
+
+        <!-- ======================= -->
+        <!-- RESULT CARDS -->
+        <!-- ======================= -->
+
+        <div class="cards">
+
+            <!-- LOS CARD -->
+
+            <div class="card">
+
+                <h2>
+                    LOS Prediction
+                </h2>
+
+                <h3>
+                    {{ los_result }}
+                </h3>
+
+                <h4>
+                    {{ los_prob }}%
+                </h4>
+
+            </div>
+
+            <!-- MORTALITY CARD -->
+
+            <div class="card">
+
+                <h2>
+                    Mortality Prediction
+                </h2>
+
+                <h3>
+                    {{ mortality_result }}
+                </h3>
+
+                <h4>
+                    {{ mortality_prob }}%
+                </h4>
+
+            </div>
+
+        </div>
+
+        <!-- ======================= -->
+        <!-- PATIENT PARAMETERS -->
+        <!-- ======================= -->
+
+        <div class="parameter-section">
+
+            <h2>
+                Patient Parameters
+            </h2>
+
+            <div class="parameter-grid">
+
+                <div class="parameter-box">
+                    <span>Temperature</span>
+                    <strong>{{ patient_values["Temperature"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>MAP</span>
+                    <strong>{{ patient_values["MeanArterialPressure"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Heart Rate</span>
+                    <strong>{{ patient_values["HeartRate"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Respiratory Rate</span>
+                    <strong>{{ patient_values["RespiratoryRate"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>FiO2</span>
+                    <strong>{{ patient_values["FiO2"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>pO2</span>
+                    <strong>{{ patient_values["pO2"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>pCO2</span>
+                    <strong>{{ patient_values["pCO2"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Arterial pH</span>
+                    <strong>{{ patient_values["ArterialpH"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Sodium</span>
+                    <strong>{{ patient_values["Sodium"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Creatinine</span>
+                    <strong>{{ patient_values["Creatinine"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Urea</span>
+                    <strong>{{ patient_values["Urea"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Albumin</span>
+                    <strong>{{ patient_values["Albumin"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Bilirubin</span>
+                    <strong>{{ patient_values["Bilirubin"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>Hematocrit</span>
+                    <strong>{{ patient_values["Hematocrit"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>WBC</span>
+                    <strong>{{ patient_values["WBC"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>APACHE IV</span>
+                    <strong>{{ patient_values["ApacheivScore"] }}</strong>
+                </div>
+
+                <div class="parameter-box">
+                    <span>APS Score</span>
+                    <strong>{{ patient_values["ApsScore"] }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ======================= -->
+        <!-- GRAPH -->
+        <!-- ======================= -->
+
+        <div class="chart-box">
+
+            <canvas id="predictionChart"></canvas>
+
+        </div>
+
+        <!-- ======================= -->
+        <!-- DOWNLOAD -->
+        <!-- ======================= -->
+
+        <div class="download-section">
+
+            <a href="/download-report">
+
+                <button class="download-btn">
+
+                    Download Complete PDF Report
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- ======================= -->
+    <!-- CHART -->
+    <!-- ======================= -->
+    <script>
+
+    const losProb = Number("{{ los_prob }}");
+
+    const mortalityProb = Number("{{ mortality_prob }}");
+
+    const ctx = document.getElementById('predictionChart');
+
+    new Chart(ctx, {
+
+        type: 'line',
+
+        data: {
+
+            labels: [
+
+                'Yesterday',
+                'Today',
+                'Tomorrow'
+
+            ],
+
+            datasets: [
+
+                {
+
+                    label: 'ICU LOS Trend',
+
+                    data: [
+
+                        20,
+                        losProb,
+                        35
+
+                    ],
+
+                    borderWidth: 4,
+
+                    tension: 0.4
+
+                },
+
+                {
+
+                    label: 'Mortality Risk',
+
+                    data: [
+
+                        15,
+                        mortalityProb,
+                        30
+
+                    ],
+
+                    borderWidth: 4,
+
+                    tension: 0.4
+
+                }
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true
+
+        }
+
+    });
+
+</script>
+</body>
+
+</html>
